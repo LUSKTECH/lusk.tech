@@ -21,7 +21,7 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.1 }}
                     >
-                        <span className="gradient-text">Cloud-Native</span> IT Services
+                        <span className="gradient-text">Cloud-Native</span>{' '}IT Services
                     </motion.h1>
 
                     <motion.p
@@ -40,8 +40,7 @@ const Hero = () => {
                         transition={{ duration: 0.8, delay: 0.5 }}
                     >
                         <a href="#contact" className="btn btn-primary">
-                            Start a Project
-                            <span className="btn-arrow">→</span>
+                            Start a Project{' '}<span className="btn-arrow">→</span>
                         </a>
                         <a href="#services" className="btn btn-secondary">Explore Services</a>
                     </motion.div>

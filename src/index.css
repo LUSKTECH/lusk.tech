@@ -376,7 +376,6 @@ a {
 }
 
 .portfolio-item {
-  display: block;
   background: var(--bg-card);
   border-radius: var(--radius);
   height: 400px;

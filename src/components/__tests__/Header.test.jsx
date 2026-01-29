@@ -13,7 +13,7 @@ const renderHeader = () => {
 
 describe('Header', () => {
     beforeEach(() => {
-        window.scrollY = 0;
+        globalThis.scrollY = 0;
     });
 
     it('renders the logo', () => {
@@ -71,8 +71,8 @@ describe('Header', () => {
         renderHeader();
         
         // Simulate scroll
-        window.scrollY = 100;
-        fireEvent.scroll(window);
+        globalThis.scrollY = 100;
+        fireEvent.scroll(globalThis);
         
         // Header should have scrolled class/style
         const header = screen.getByRole('banner');

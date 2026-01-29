@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 const ContactModal = ({ isOpen, onClose }) => {
     const [formData, setFormData] = useState({
@@ -63,25 +64,24 @@ const ContactModal = ({ isOpen, onClose }) => {
     return (
         <AnimatePresence>
             {isOpen && (
-                <>
+                <motion.div
+                    className="modal-overlay"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={onClose}
+                >
                     <motion.div
-                        className="modal-overlay"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={onClose}
+                        className="modal-content"
+                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                        onClick={(e) => e.stopPropagation()}
                     >
-                        <motion.div
-                            className="modal-content"
-                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                        <button className="modal-close" onClick={onClose} aria-label="Close modal">
-                            ✕
-                        </button>
+                    <button className="modal-close" onClick={onClose} aria-label="Close modal">
+                        ✕
+                    </button>
                         
                         <h2 style={{ marginBottom: '1rem' }}>Get in Touch</h2>
                         <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
@@ -348,11 +348,15 @@ const ContactModal = ({ isOpen, onClose }) => {
                             }
                         }
                     `}</style>
-                    </motion.div>
-                </>
+                </motion.div>
             )}
         </AnimatePresence>
     );
+};
+
+ContactModal.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired
 };
 
 export default ContactModal;

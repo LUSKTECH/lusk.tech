@@ -32,6 +32,7 @@ server/contacts.db-journal
 
 # Test coverage
 coverage
+test-results.junit.xml
 
 # Lighthouse CI
 .lighthouseci

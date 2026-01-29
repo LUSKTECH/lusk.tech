@@ -61,7 +61,7 @@ const Services = () => {
                 <div className="services-grid">
                     {services.map((service, index) => (
                         <motion.div
-                            key={index}
+                            key={service.title}
                             className="service-card"
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}

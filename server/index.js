@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
+import rateLimit from 'express-rate-limit';
 import Database from 'better-sqlite3';
 import postmark from 'postmark';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -13,6 +14,30 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Disable X-Powered-By header for security
+app.disable('x-powered-by');
+
+// Rate limiting - 100 requests per 15 minutes per IP
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests, please try again later.' }
+});
+
+// Stricter rate limit for contact form - 5 submissions per hour
+const contactLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many contact submissions, please try again later.' }
+});
+
+// Apply general rate limiting to all requests
+app.use(limiter);
 
 // Initialize Postmark client
 const postmarkClient = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
@@ -38,7 +63,7 @@ db.exec(`
 `);
 
 // Contact form endpoint
-app.post('/api/contact', async (req, res) => {
+app.post('/api/contact', contactLimiter, async (req, res) => {
   const { name, email, phone, company, message } = req.body;
 
   // Validation

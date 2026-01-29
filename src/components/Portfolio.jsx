@@ -51,7 +51,7 @@ const Portfolio = () => {
                 <div className="portfolio-grid">
                     {projects.map((project, index) => (
                         <motion.a
-                            key={index}
+                            key={project.title}
                             href={project.link}
                             target="_blank"
                             className="portfolio-item"
