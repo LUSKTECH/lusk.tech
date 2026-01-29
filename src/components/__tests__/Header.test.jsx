@@ -18,8 +18,10 @@ describe('Header', () => {
 
     it('renders the logo', () => {
         renderHeader();
-        const logo = screen.getByAltText('Lusk Technologies');
+        // Logo image has empty alt since text "Lusk Technologies" is adjacent
+        const logo = screen.getByRole('presentation');
         expect(logo).toBeInTheDocument();
+        expect(logo).toHaveAttribute('src', '/logos/logomark-white.svg');
     });
 
     it('renders navigation links on home page', () => {

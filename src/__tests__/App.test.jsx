@@ -15,8 +15,9 @@ describe('App', () => {
 
     it('renders Header component', () => {
         renderApp();
-        const logos = screen.getAllByAltText('Lusk Technologies');
-        expect(logos.length).toBeGreaterThan(0);
+        // Footer has logo with alt text, Header logo has empty alt
+        const logo = screen.getByAltText('Lusk Technologies');
+        expect(logo).toBeInTheDocument();
     });
 
     it('renders Footer component', () => {

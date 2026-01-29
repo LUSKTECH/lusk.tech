@@ -43,7 +43,7 @@ const Header = () => {
                 <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <img 
                         src="/logos/logomark-white.svg" 
-                        alt="Lusk Technologies" 
+                        alt="" 
                         style={{ height: scrolled ? '45px' : '55px', transition: 'height 0.3s ease' }}
                     />
                     <span className="logo-text" style={{ 

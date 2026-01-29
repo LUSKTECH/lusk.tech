@@ -45,7 +45,7 @@ const About = () => {
                         transition={{ duration: 0.6 }}
                     >
                         <div className="founder-info">
-                            <h4>Cody Lusk</h4>
+                            <h3>Cody Lusk</h3>
                             <span className="role">Owner / Founder</span>
                             <div className="social-links">
                                 <a href="https://github.com/lusky3" target="_blank" aria-label="Github">GH</a>
