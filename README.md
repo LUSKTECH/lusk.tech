@@ -2,8 +2,8 @@
 
 <!-- Build & Deployment Status -->
 [![CI](https://github.com/LUSKTECH/lusk.tech/actions/workflows/ci.yml/badge.svg)](https://github.com/LUSKTECH/lusk.tech/actions/workflows/ci.yml)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-SITE-ID/deploy-status)](https://app.netlify.com/sites/lusk.tech/deploys)
-[![Uptime Robot status](https://img.shields.io/uptimerobot/status/m797506042-YOUR-ID?label=uptime)](https://stats.uptimerobot.com)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7e76cdc4-346c-4a37-8730-bbc1fe5213e1/deploy-status)](https://app.netlify.com/projects/lusktech/deploys)
+[![Uptime Robot status](https://img.shields.io/uptimerobot/status/m802244571-e804caa65e0b2fa45681ed62?label=uptime)](https://stats.uptimerobot.com)
 
 <!-- Security & Quality -->
 [![Security](https://github.com/LUSKTECH/lusk.tech/actions/workflows/security.yml/badge.svg)](https://github.com/LUSKTECH/lusk.tech/actions/workflows/security.yml)
@@ -78,11 +78,8 @@ Official website for Lusk Technologies, Inc. - Cloud-Native IT Services.
 
 ### Dependencies
 
-![Dependencies Status](https://img.shields.io/librariesio/github/LUSKTECH/lusk.tech)
-![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-brightgreen?logo=dependabot)
+[![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-brightgreen?logo=dependabot)](https://github.com/LUSKTECH/lusk.tech/security/dependabot)
 ![npm dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen?logo=npm)
-- 📧 Contact form with email integration (Postmark)
-- 🔐 SQLite database for contact submissions
 
 
 ## 📋 Table of Contents
