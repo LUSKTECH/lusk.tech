@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security Vulnerability
+    url: https://github.com/lusktechnologies/lusk.tech/security/advisories/new
+    about: Please report security vulnerabilities through GitHub Security Advisories
+  - name: General Question
+    url: https://lusk.tech/#contact
+    about: For general questions, please use the contact form on our website
+  - name: Documentation
+    url: https://github.com/lusktechnologies/lusk.tech/blob/main/README.md
+    about: Check our documentation for setup and usage information
