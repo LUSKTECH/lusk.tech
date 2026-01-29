@@ -4,22 +4,22 @@ const projects = [
     {
         title: 'Rookie Hockey',
         link: 'https://rookiehockey.ca/',
-        image: '/portfolio/rookiehockey.png'
+        image: '/portfolio/portfolio-rookiehockey.png'
     },
     {
         title: 'Locotek',
         link: 'https://locotek.ca/',
-        image: '/portfolio/locotek.png'
+        image: '/portfolio/portfolio-locotek.png'
     },
     {
         title: 'Lusk App',
         link: 'https://lusk.app/',
-        image: '/portfolio/lusk-app.png'
+        image: '/portfolio/portfolio-lusk-app.png'
     },
     {
         title: 'A Cut Above Lawn Care',
         link: 'https://acutabovelawncareinc.com/',
-        image: '/portfolio/acutabove.png'
+        image: '/portfolio/portfolio-acutabove.png'
     }
 ];
 
