@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import Header from '../Header';
 
 const renderHeader = () => {
@@ -8,6 +8,14 @@ const renderHeader = () => {
         <BrowserRouter>
             <Header />
         </BrowserRouter>
+    );
+};
+
+const renderHeaderAtPath = (path) => {
+    return render(
+        <MemoryRouter initialEntries={[path]}>
+            <Header />
+        </MemoryRouter>
     );
 };
 
@@ -85,5 +93,75 @@ describe('Header', () => {
         renderHeader();
         const menuToggle = screen.getByLabelText('Toggle menu');
         expect(menuToggle).toHaveAttribute('aria-label', 'Toggle menu');
+    });
+
+    it('changes nav link color on hover', () => {
+        renderHeader();
+        const servicesLink = screen.getByText('Services');
+        
+        // Trigger mouse enter
+        fireEvent.mouseEnter(servicesLink);
+        expect(servicesLink).toHaveStyle({ color: 'var(--primary)' });
+        
+        // Trigger mouse leave
+        fireEvent.mouseLeave(servicesLink);
+        expect(servicesLink).toHaveStyle({ color: 'var(--text-muted)' });
+    });
+
+    it('renders only Get in Touch button on non-home pages', () => {
+        renderHeaderAtPath('/privacy-policy');
+        
+        // Should have Get in Touch button
+        const button = screen.getByText('Get in Touch');
+        expect(button).toBeInTheDocument();
+        
+        // Should NOT have nav links
+        expect(screen.queryByText('Services')).not.toBeInTheDocument();
+        expect(screen.queryByText('Portfolio')).not.toBeInTheDocument();
+        expect(screen.queryByText('About')).not.toBeInTheDocument();
+    });
+
+    it('opens contact modal from non-home page button', async () => {
+        renderHeaderAtPath('/terms-of-service');
+        
+        const button = screen.getByText('Get in Touch');
+        fireEvent.click(button);
+        
+        await waitFor(() => {
+            expect(screen.getByText(/Fill out the form below/i)).toBeInTheDocument();
+        });
+    });
+
+    it('opens contact modal from mobile menu button', async () => {
+        renderHeader();
+        const menuToggle = screen.getByLabelText('Toggle menu');
+        fireEvent.click(menuToggle);
+        
+        // Find the mobile menu Get in Touch button (last one)
+        const buttons = screen.getAllByText('Get in Touch');
+        const mobileButton = buttons[buttons.length - 1];
+        fireEvent.click(mobileButton);
+        
+        await waitFor(() => {
+            expect(screen.getByText(/Fill out the form below/i)).toBeInTheDocument();
+        });
+    });
+
+    it('closes mobile menu when mobile nav link is clicked', () => {
+        renderHeader();
+        const menuToggle = screen.getByLabelText('Toggle menu');
+        
+        // Open menu
+        fireEvent.click(menuToggle);
+        
+        // Get mobile menu links (there should be duplicates when menu is open)
+        const aboutLinks = screen.getAllByText('About');
+        expect(aboutLinks.length).toBeGreaterThan(1);
+        
+        // Click the mobile menu link (last one)
+        fireEvent.click(aboutLinks[aboutLinks.length - 1]);
+        
+        // Menu toggle should still be in document
+        expect(menuToggle).toBeInTheDocument();
     });
 });

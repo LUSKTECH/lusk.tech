@@ -142,4 +142,33 @@ describe('ContactModal', () => {
             expect(screen.getByText(/error/i)).toBeInTheDocument();
         });
     });
+
+    it('displays server error message on non-ok response', async () => {
+        globalThis.fetch.mockResolvedValueOnce({
+            ok: false,
+            json: async () => ({ error: 'Server validation failed' })
+        });
+
+        render(<ContactModal isOpen={true} onClose={() => {}} />);
+        
+        fireEvent.change(screen.getByLabelText(/Name/i), {
+            target: { value: 'John Doe' }
+        });
+        fireEvent.change(screen.getByLabelText(/Email/i), {
+            target: { value: 'john@example.com' }
+        });
+        fireEvent.change(screen.getByLabelText(/Phone/i), {
+            target: { value: '555-1234' }
+        });
+        fireEvent.change(screen.getByLabelText(/Message/i), {
+            target: { value: 'Test message' }
+        });
+        
+        const submitButton = screen.getByText(/Send Message/i);
+        fireEvent.click(submitButton);
+        
+        await waitFor(() => {
+            expect(screen.getByText(/Server validation failed/i)).toBeInTheDocument();
+        });
+    });
 });
