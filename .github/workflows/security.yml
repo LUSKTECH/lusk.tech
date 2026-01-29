@@ -107,12 +107,13 @@ jobs:
   security-scorecard:
     name: OpenSSF Scorecard
     runs-on: ubuntu-latest
+    # Only run on push to main (not PRs)
     if: github.event_name != 'pull_request'
     permissions:
-      security-events: write
-      id-token: write
-      contents: read
-      actions: read
+      security-events: write  # Required to upload SARIF results
+      id-token: write  # Required to publish results and get a badge
+      contents: read  # Required to read repository contents
+      actions: read  # Required for workflow identification
     
     steps:
       - name: Checkout code
@@ -122,12 +123,17 @@ jobs:
       
       - name: Run analysis
         uses: ossf/scorecard-action@v2.4.3
+        continue-on-error: true
         with:
           results_file: results.sarif
           results_format: sarif
+          # Publish results to OpenSSF REST API
+          # Note: Only works for public repos
           publish_results: true
       
       - name: Upload to GitHub Security
         uses: github/codeql-action/upload-sarif@v4
+        if: always()
+        continue-on-error: true
         with:
           sarif_file: results.sarif
