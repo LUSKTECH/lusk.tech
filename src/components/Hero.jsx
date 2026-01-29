@@ -12,7 +12,7 @@ const Hero = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <span className="badge-dot"></span>
+                        <span className="badge-dot"></span>{' '}
                         Available for New Projects
                     </motion.div>
 
@@ -40,7 +40,7 @@ const Hero = () => {
                         transition={{ duration: 0.8, delay: 0.5 }}
                     >
                         <a href="#contact" className="btn btn-primary">
-                            Start a Project{' '}<span className="btn-arrow">→</span>
+                            Start a Project <span className="btn-arrow">→</span>
                         </a>
                         <a href="#services" className="btn btn-secondary">Explore Services</a>
                     </motion.div>

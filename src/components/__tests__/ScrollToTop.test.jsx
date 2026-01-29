@@ -1,12 +1,11 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render } from '@testing-library/react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import ScrollToTop from '../ScrollToTop';
 import { useEffect } from 'react';
 
-// Mock window.scrollTo
-const scrollToMock = vi.fn();
-window.scrollTo = scrollToMock;
+// Create a spy on globalThis.scrollTo
+let scrollToSpy;
 
 const TestComponent = () => {
     const navigate = useNavigate();
@@ -24,7 +23,13 @@ const TestComponent = () => {
 
 describe('ScrollToTop', () => {
     beforeEach(() => {
-        scrollToMock.mockClear();
+        scrollToSpy = vi.spyOn(globalThis, 'scrollTo').mockImplementation(() => {
+            /* Mock: scroll behavior for testing */
+        });
+    });
+
+    afterEach(() => {
+        scrollToSpy.mockRestore();
     });
 
     it('scrolls to top on mount', () => {
@@ -34,7 +39,7 @@ describe('ScrollToTop', () => {
             </BrowserRouter>
         );
         
-        expect(scrollToMock).toHaveBeenCalledWith(0, 0);
+        expect(scrollToSpy).toHaveBeenCalledWith(0, 0);
     });
 
     it('scrolls to top on route change', async () => {
@@ -52,7 +57,7 @@ describe('ScrollToTop', () => {
         await new Promise(resolve => setTimeout(resolve, 200));
         
         // Should be called at least twice (initial + navigation)
-        expect(scrollToMock.mock.calls.length).toBeGreaterThanOrEqual(2);
+        expect(scrollToSpy.mock.calls.length).toBeGreaterThanOrEqual(2);
     });
 
     it('renders nothing', () => {
