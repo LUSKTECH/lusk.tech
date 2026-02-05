@@ -33,6 +33,8 @@ const About = () => {
                                 src="/profile/profile-round-transparent.png" 
                                 alt="Cody Lusk - Founder of Lusk Technologies"
                                 className="profile-image"
+                                width="300"
+                                height="300"
                             />
                         </div>
                     </motion.div>

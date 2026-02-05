@@ -9,7 +9,9 @@ const Footer = () => {
                         <img 
                             src="/logos/logo-full-white.svg" 
                             alt="Lusk Technologies" 
-                            style={{ height: '8rem', marginBottom: '1.5rem' }}
+                            width="300"
+                            height="128"
+                            style={{ height: '8rem', width: 'auto', marginBottom: '1.5rem' }}
                         />
                     </Link>
                     <p style={{ fontSize: '1.1rem', maxWidth: '500px', margin: '0 auto 3rem', lineHeight: '1.7' }}>

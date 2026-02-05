@@ -44,7 +44,9 @@ const Header = () => {
                     <img 
                         src="/logos/logomark-white.svg" 
                         alt="" 
-                        style={{ height: scrolled ? '45px' : '55px', transition: 'height 0.3s ease' }}
+                        width="55"
+                        height="55"
+                        style={{ height: scrolled ? '45px' : '55px', width: 'auto', transition: 'height 0.3s ease' }}
                     />
                     <span className="logo-text" style={{ 
                         fontSize: scrolled ? '1.3rem' : '1.5rem', 
