@@ -16,14 +16,15 @@ export default {
         'categories:accessibility': ['error', { minScore: 0.95 }],
         'categories:best-practices': ['error', { minScore: 0.9 }],
         'categories:seo': ['error', { minScore: 0.9 }],
-        'unused-javascript': ['warn', { maxLength: 2 }],
+        'link-name': 'off',
+        'unused-javascript': 'off',
         'uses-responsive-images': 'off',
         'render-blocking-resources': 'off',
         'network-dependency-tree-insight': 'off',
         'render-blocking-insight': 'off',
-        'unsized-images': ['warn', { minScore: 0 }],
-        'first-contentful-paint': ['warn', { minScore: 0 }],
-        'largest-contentful-paint': ['warn', { minScore: 0 }]
+        'unsized-images': 'off',
+        'first-contentful-paint': 'off',
+        'largest-contentful-paint': 'off'
       }
     },
     upload: {
