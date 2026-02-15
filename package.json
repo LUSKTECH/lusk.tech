@@ -52,6 +52,7 @@
   },
   "overrides": {
     "undici": "^7.19.2",
+    "ajv": "^8.17.1",
     "eslint-plugin-react-hooks": {
       "eslint": "^10.0.0"
     }
