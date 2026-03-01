@@ -13,7 +13,7 @@ This document provides an overview of the complete CI/CD setup for this project.
 - ✅ **Bundle Size** (`bundle-size.yml`) - Performance budget enforcement
 
 #### Tools Integrated
-- ESLint - Code linting
+- oxlint - Code linting
 - Vitest - Unit testing with coverage
 - axe-core - Accessibility testing
 - Lighthouse CI - Performance/SEO/Best practices audits
@@ -97,7 +97,7 @@ This document provides an overview of the complete CI/CD setup for this project.
 ### 8. Code Quality
 
 #### Features
-- ✅ ESLint configuration
+- ✅ oxlint configuration
 - ✅ SonarCloud integration
 - ✅ Code coverage tracking (Codecov)
 - ✅ Test coverage requirements
@@ -138,7 +138,7 @@ This document provides an overview of the complete CI/CD setup for this project.
 1. **Code Analysis**
    - CodeQL (semantic analysis)
    - SonarCloud (quality + security)
-   - ESLint (static analysis)
+   - oxlint (static analysis)
 
 2. **Dependency Security**
    - Snyk (vulnerability database)
@@ -163,7 +163,7 @@ This document provides an overview of the complete CI/CD setup for this project.
 ### Pull Request Requirements
 
 All PRs must pass:
-1. ✅ Linting (ESLint)
+1. ✅ Linting (oxlint)
 2. ✅ Tests (Vitest)
 3. ✅ Build (Vite)
 4. ✅ Accessibility (axe-core)

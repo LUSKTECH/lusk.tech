@@ -139,7 +139,7 @@ npm run test             # Run tests
 npm run test:coverage    # Run tests with coverage
 
 # Code Quality
-npm run lint             # Run ESLint
+npm run lint             # Run oxlint
 
 # Backend
 npm run server           # Start Express server
@@ -247,7 +247,7 @@ See [.github/DEPLOYMENT.md](.github/DEPLOYMENT.md) for detailed deployment proce
 
 All PRs must pass:
 
-- ✅ Linting (ESLint)
+- ✅ Linting (oxlint)
 - ✅ Tests (Vitest)
 - ✅ Build
 - ✅ Accessibility (axe-core)
@@ -380,7 +380,7 @@ Bundle size limits:
 ### Testing & Quality
 
 - Vitest
-- ESLint
+- oxlint
 - axe-core
 - Lighthouse CI
 

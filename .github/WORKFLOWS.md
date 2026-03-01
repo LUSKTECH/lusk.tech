@@ -8,7 +8,7 @@ This document explains the CI/CD workflows configured for this project.
 Runs on every push and PR to main/develop branches.
 
 **Jobs:**
-- **Lint**: ESLint code quality checks
+- **Lint**: oxlint code quality checks
 - **Test & Coverage**: Vitest tests with Codecov reporting
 - **Build**: Production build verification
 - **A11y**: Accessibility testing with axe-core
