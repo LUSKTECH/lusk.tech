@@ -16,6 +16,11 @@ jobs:
     name: Check Bundle Size
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@v6
       
       - uses: actions/setup-node@v6

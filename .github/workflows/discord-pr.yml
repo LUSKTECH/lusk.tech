@@ -1,0 +1,25 @@
+name: Discord PR Notifications
+
+on:
+  workflow_call:
+    secrets:
+      DISCORD_WEBHOOK:
+        required: true
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ github.event.pull_request.merged && 'success' || github.event.action }}
+          title: "PR ${{ github.event.action }}: ${{ github.event.pull_request.title }}"
+          description: |
+            **Repository:** ${{ github.repository }}
+            **Author:** ${{ github.event.pull_request.user.login }}
+            **Branch:** ${{ github.event.pull_request.head.ref }} → ${{ github.event.pull_request.base.ref }}
+          url: ${{ github.event.pull_request.html_url }}
+          username: GitHub Actions
+          avatar_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png

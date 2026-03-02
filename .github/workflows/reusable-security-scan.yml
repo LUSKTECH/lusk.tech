@@ -1,0 +1,75 @@
+name: Reusable Security Scan
+
+on:
+  workflow_call:
+    inputs:
+      scan_type:
+        description: 'Type of security scan to run: trivy, snyk, or safety'
+        required: true
+        type: string
+    secrets:
+      snyk_token:
+        description: 'Snyk API token (required for snyk scan_type)'
+        required: false
+      safety_api_key:
+        description: 'Safety CLI API key (required for safety scan_type)'
+        required: false
+
+jobs:
+  trivy:
+    name: Trivy Filesystem Scan
+    if: ${{ inputs.scan_type == 'trivy' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.34.1
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: CRITICAL,HIGH
+          exit-code: '1'
+          format: table
+
+  snyk:
+    name: Snyk Dependency Scan
+    if: ${{ inputs.scan_type == 'snyk' }}
+    runs-on: ubuntu-latest
+    env:
+      SNYK_TOKEN: ${{ secrets.snyk_token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run Snyk test
+        uses: snyk/actions/node@master
+        with:
+          args: --severity-threshold=high
+
+  safety:
+    name: Safety CLI Scan
+    if: ${{ inputs.scan_type == 'safety' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install safety
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Safety check
+        env:
+          SAFETY_API_KEY: ${{ secrets.safety_api_key }}
+        run: safety check --key "$SAFETY_API_KEY" --output screen
