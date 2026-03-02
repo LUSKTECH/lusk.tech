@@ -19,6 +19,9 @@ on:
         type: string
         default: 'pinned,security'
 
+permissions:
+  contents: read
+
 jobs:
   stale:
     name: Label and Close Stale Issues/PRs
@@ -27,6 +30,11 @@ jobs:
       issues: write
       pull-requests: write
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
+        with:
+          egress-policy: audit
+
       - uses: actions/stale@v9
         with:
           days-before-stale: ${{ inputs.days_before_stale }}
