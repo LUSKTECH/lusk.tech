@@ -10,12 +10,12 @@ on:
 jobs:
   notify-pr:
     if: github.event_name == 'pull_request'
-    uses: LUSKTECH/.github/.github/workflows/discord-pr.yml@main
+    uses: ./.github/workflows/discord-pr.yml
     secrets:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
   notify-failure:
     if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'failure'
-    uses: LUSKTECH/.github/.github/workflows/discord-workflow-failure.yml@main
+    uses: ./.github/workflows/discord-workflow-failure.yml
     secrets:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}

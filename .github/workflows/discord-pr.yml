@@ -14,7 +14,8 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          status: ${{ github.event.pull_request.merged && 'success' || github.event.action }}
+          status: Success
+          noprefix: true
           title: "PR ${{ github.event.action }}: ${{ github.event.pull_request.title }}"
           description: |
             **Repository:** ${{ github.repository }}
