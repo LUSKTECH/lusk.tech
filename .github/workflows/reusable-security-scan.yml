@@ -15,12 +15,20 @@ on:
         description: 'Safety CLI API key (required for safety scan_type)'
         required: false
 
+permissions:
+  contents: read
+
 jobs:
   trivy:
     name: Trivy Filesystem Scan
     if: ${{ inputs.scan_type == 'trivy' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@v4
 
       - name: Run Trivy filesystem scan
@@ -39,6 +47,11 @@ jobs:
     env:
       SNYK_TOKEN: ${{ secrets.snyk_token }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
@@ -58,6 +71,11 @@ jobs:
     if: ${{ inputs.scan_type == 'safety' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
