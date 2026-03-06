@@ -20,7 +20,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "express-rate-limit": "^8.2.1",
+    "express-rate-limit": "^8.2.2",
     "framer-motion": "^12.27.5",
     "postmark": "^4.0.5",
     "prop-types": "^15.8.1",
