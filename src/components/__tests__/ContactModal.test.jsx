@@ -55,8 +55,7 @@ describe('ContactModal', () => {
 
     it('submits form with valid data', async () => {
         globalThis.fetch.mockResolvedValueOnce({
-            ok: true,
-            json: async () => ({ success: true })
+            ok: true
         });
 
         render(<ContactModal isOpen={true} onClose={() => {}} />);
@@ -79,10 +78,10 @@ describe('ContactModal', () => {
         
         await waitFor(() => {
             expect(globalThis.fetch).toHaveBeenCalledWith(
-                '/api/contact',
+                '/',
                 expect.objectContaining({
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 })
             );
         });
@@ -90,8 +89,7 @@ describe('ContactModal', () => {
 
     it('displays success message after submission', async () => {
         globalThis.fetch.mockResolvedValueOnce({
-            ok: true,
-            json: async () => ({ success: true })
+            ok: true
         });
 
         render(<ContactModal isOpen={true} onClose={() => {}} />);
@@ -143,10 +141,9 @@ describe('ContactModal', () => {
         });
     });
 
-    it('displays server error message on non-ok response', async () => {
+    it('displays error message on non-ok response', async () => {
         globalThis.fetch.mockResolvedValueOnce({
-            ok: false,
-            json: async () => ({ error: 'Server validation failed' })
+            ok: false
         });
 
         render(<ContactModal isOpen={true} onClose={() => {}} />);
@@ -168,7 +165,7 @@ describe('ContactModal', () => {
         fireEvent.click(submitButton);
         
         await waitFor(() => {
-            expect(screen.getByText(/Server validation failed/i)).toBeInTheDocument();
+            expect(screen.getByText(/Failed to send message/i)).toBeInTheDocument();
         });
     });
 });
