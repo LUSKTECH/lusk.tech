@@ -143,8 +143,10 @@ jobs:
           chrome-version: 150
           install-chromedriver: true
       - name: Serve and test
+        env:
+          CHROME_TEST_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+          CHROMEDRIVER_TEST_PATH: ${{ steps.setup-chrome.outputs.chromedriver-path }}
         run: |
-          sudo rm -f /opt/google/chrome/chrome
           npx serve -s dist -l 3000 &
           sleep 5
           npx @axe-core/cli http://localhost:3000 --exit
