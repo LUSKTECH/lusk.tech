@@ -128,15 +128,13 @@ jobs:
         with:
           name: dist
           path: dist/
-      - name: Install matching Chrome and ChromeDriver
-        run: |
-          npx browser-driver-manager install chrome --verbose
-          echo "CHROMEDRIVER_PATH=$(npx browser-driver-manager which chromedriver)" >> $GITHUB_ENV
+      - name: Install matching Chrome for ChromeDriver
+        run: npx browser-driver-manager install chrome@150
       - name: Serve and test
         run: |
           npx serve -s dist -l 3000 &
           sleep 5
-          npx @axe-core/cli http://localhost:3000 --exit --chromedriver-path "$CHROMEDRIVER_PATH"
+          npx @axe-core/cli http://localhost:3000 --exit
 
   lighthouse:
     name: Lighthouse CI
