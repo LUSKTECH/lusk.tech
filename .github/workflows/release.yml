@@ -19,20 +19,20 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           fetch-depth: 0
 
       - name: Generate Changelog
         id: changelog
-        uses: mikepenz/release-changelog-builder-action@v6
+        uses: mikepenz/release-changelog-builder-action@c9bcd8238b6f41e05561348339429d360b1c0247 # v6
         with:
           configuration: ".github/release-config.json"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
-        uses: step-security/action-gh-release@v2
+        uses: step-security/action-gh-release@dc29ef0d1f6f9a032a97ec797d9cb7ea788dde41 # v2
         with:
           body: ${{ steps.changelog.outputs.changelog }}
           draft: false
@@ -40,7 +40,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: '24'
           cache: 'npm'
@@ -51,7 +51,7 @@ jobs:
           npm run build
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: release-build-${{ github.ref_name }}
           path: dist/

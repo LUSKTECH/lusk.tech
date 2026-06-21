@@ -129,12 +129,12 @@ jobs:
           name: dist
           path: dist/
       - name: Install matching Chrome and ChromeDriver
-        run: npx browser-driver-manager install chrome
+        run: npx browser-driver-manager install chrome --verbose
       - name: Serve and test
         run: |
           npx serve -s dist -l 3000 &
           sleep 5
-          npx @axe-core/cli http://localhost:3000 --exit
+          npx @axe-core/cli http://localhost:3000 --exit --chromedriver-path $(npx browser-driver-manager which chromedriver)
 
   lighthouse:
     name: Lighthouse CI
