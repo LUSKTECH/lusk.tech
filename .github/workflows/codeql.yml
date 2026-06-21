@@ -5,15 +5,15 @@ on:
     branches: [main, develop]
     paths:
       - 'src/**'
-      - 'server/**'
       - '*.js'
+      - '*.jsx'
       - '.github/workflows/codeql.yml'
   pull_request:
     branches: [main, develop]
     paths:
       - 'src/**'
-      - 'server/**'
       - '*.js'
+      - '*.jsx'
       - '.github/workflows/codeql.yml'
   schedule:
     - cron: '0 6 * * 1'
@@ -44,15 +44,17 @@ jobs:
           egress-policy: audit
 
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
+        uses: github/codeql-action/init@411bbbe57033eedfc1a82d68c01345aa96c737d7 # v4
         with:
           languages: ${{ matrix.language }}
 
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v4
+        uses: github/codeql-action/autobuild@411bbbe57033eedfc1a82d68c01345aa96c737d7 # v4
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v4
+        uses: github/codeql-action/analyze@411bbbe57033eedfc1a82d68c01345aa96c737d7 # v4

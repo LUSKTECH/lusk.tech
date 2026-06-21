@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const ContactModal = ({ isOpen, onClose }) => {
     const [formData, setFormData] = useState({
+        'bot-field': '',
         name: '',
         email: '',
         phone: '',
@@ -37,21 +38,23 @@ const ContactModal = ({ isOpen, onClose }) => {
         setStatus({ type: '', message: '' });
 
         try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
+            const body = new URLSearchParams({
+                'form-name': 'contact',
+                ...formData
+            }).toString();
 
-            const data = await response.json();
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body
+            });
 
             if (response.ok) {
                 setStatus({ type: 'success', message: 'Message sent successfully! We\'ll be in touch soon.' });
-                // Only clear form on successful submission
-                setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+                setFormData({ 'bot-field': '', name: '', email: '', phone: '', company: '', message: '' });
                 setTimeout(() => onClose(), 2000);
             } else {
-                setStatus({ type: 'error', message: data.error || 'Failed to send message. Please try again.' });
+                setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
             }
         } catch (err) {
             setStatus({ type: 'error', message: 'Network error. Please try again later.' });
@@ -89,6 +92,12 @@ const ContactModal = ({ isOpen, onClose }) => {
                         </p>
 
                         <form onSubmit={handleSubmit}>
+                            <p style={{ display: 'none' }}>
+                                <label>
+                                    Don&apos;t fill this out if you&apos;re human:{' '}
+                                    <input name="bot-field" value={formData['bot-field']} onChange={handleChange} />
+                                </label>
+                            </p>
                             <div className="form-row">
                                 <div className="form-group">
                                     <label htmlFor="name">Name *</label>

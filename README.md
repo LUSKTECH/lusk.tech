@@ -23,7 +23,7 @@
 
 <!-- Technology Stack -->
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-24-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
@@ -46,8 +46,7 @@ Official website for Lusk Technologies, Inc. - Cloud-Native IT Services.
 - 📱 Mobile-first responsive design
 - 🎯 SEO optimized
 - 🚀 Performance optimized (90+ Lighthouse scores)
-- 📧 Contact form with email integration (Postmark)
-- 🔐 SQLite database for contact submissions
+- 📧 Contact form with Netlify Forms
 
 
 ## 📊 Project Metrics
@@ -111,9 +110,6 @@ cd lusk.tech
 # Install dependencies
 npm install
 
-# Copy environment variables
-cp .env.example .env
-
 # Start development server
 npm run dev
 ```
@@ -128,7 +124,6 @@ Visit `http://localhost:5173` to see the site.
 ```bash
 # Development
 npm run dev              # Start dev server
-npm run dev:all          # Start dev server + backend
 
 # Building
 npm run build            # Production build
@@ -140,9 +135,6 @@ npm run test:coverage    # Run tests with coverage
 
 # Code Quality
 npm run lint             # Run oxlint
-
-# Backend
-npm run server           # Start Express server
 ```
 
 ### Project Structure
@@ -157,32 +149,18 @@ lusk.tech/
 │   ├── profile/         # Profile images
 │   ├── portfolio/       # Portfolio screenshots
 │   └── design/          # Design assets
-├── server/              # Express backend
-│   └── index.js         # API server
 ├── src/
 │   ├── components/      # React components
 │   ├── pages/          # Page components
 │   ├── test/           # Test utilities
 │   ├── App.jsx         # Main app component
 │   └── main.jsx        # Entry point
-├── .env.example         # Environment variables template
-└── vite.config.js      # Vite configuration
+└── vite.config.js       # Vite configuration
 ```
 
 ### Environment Variables
 
-Create a `.env` file in the root directory:
-
-```env
-# Postmark Email Service
-POSTMARK_API_KEY=your_postmark_api_key
-
-# Database
-DATABASE_PATH=./contacts.db
-
-# Server
-PORT=3001
-```
+No environment variables are required for local development. The contact form uses Netlify Forms in production.
 
 See [SETUP.md](SETUP.md) for detailed configuration instructions.
 
@@ -359,15 +337,9 @@ Bundle size limits:
 ### Frontend
 
 - React 19
-- Vite 7
+- Vite 8
 - Framer Motion
 - React Router
-
-### Backend
-
-- Express
-- SQLite (better-sqlite3)
-- Postmark (email)
 
 ### DevOps
 
