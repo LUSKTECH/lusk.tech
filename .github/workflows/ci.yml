@@ -143,9 +143,10 @@ jobs:
           install-chromedriver: true
       - name: Serve and test
         run: |
+          sudo ln -sf $(which chrome) /opt/google/chrome/chrome
           npx serve -s dist -l 3000 &
           sleep 5
-          npx @axe-core/cli http://localhost:3000 --exit --chromedriver-path $(which chromedriver)
+          npx @axe-core/cli http://localhost:3000 --exit
 
   lighthouse:
     name: Lighthouse CI
