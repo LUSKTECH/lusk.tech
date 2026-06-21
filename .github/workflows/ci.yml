@@ -140,11 +140,12 @@ jobs:
         uses: browser-actions/setup-chrome@19ae4b339ee18925ab85cf12c1041150ea4a44c8 # v1
         with:
           chrome-version: 150
+          install-chromedriver: true
       - name: Serve and test
         run: |
           npx serve -s dist -l 3000 &
           sleep 5
-          npx @axe-core/cli http://localhost:3000 --exit
+          npx @axe-core/cli http://localhost:3000 --exit --chromedriver-path $(which chromedriver)
 
   lighthouse:
     name: Lighthouse CI
