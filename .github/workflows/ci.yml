@@ -137,13 +137,15 @@ jobs:
           name: dist
           path: dist/
       - name: Setup Chrome
+        id: setup-chrome
         uses: browser-actions/setup-chrome@19ae4b339ee18925ab85cf12c1041150ea4a44c8 # v1
         with:
           chrome-version: 150
           install-chromedriver: true
       - name: Serve and test
+        env:
+          CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
         run: |
-          sudo ln -sf $(which chrome) /opt/google/chrome/chrome
           npx serve -s dist -l 3000 &
           sleep 5
           npx @axe-core/cli http://localhost:3000 --exit
