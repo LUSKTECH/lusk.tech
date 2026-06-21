@@ -155,8 +155,7 @@ lusk.tech/
 │   ├── test/           # Test utilities
 │   ├── App.jsx         # Main app component
 │   └── main.jsx        # Entry point
-├── .env.example         # Environment variables template
-└── vite.config.js      # Vite configuration
+└── vite.config.js       # Vite configuration
 ```
 
 ### Environment Variables
