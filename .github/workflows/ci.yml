@@ -136,8 +136,10 @@ jobs:
         with:
           name: dist
           path: dist/
-      - name: Install matching Chrome for ChromeDriver
-        run: npx browser-driver-manager install chrome@150
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@19ae4b339ee18925ab85cf12c1041150ea4a44c8 # v1
+        with:
+          chrome-version: 150
       - name: Serve and test
         run: |
           npx serve -s dist -l 3000 &
